@@ -4,7 +4,7 @@ resource "aws_lambda_function" "granule_to_sns_task" {
   source_code_hash = filebase64sha256("${path.module}/lambda.zip")
   handler          = "granule_to_sns.lambda_handler"
   role             = var.lambda_processing_role_arn
-  runtime          = "python3.9"
+  runtime          = "python3.10"
   timeout          = var.timeout
   memory_size      = var.memory_size
 
