@@ -1,0 +1,24 @@
+name: Release
+
+on:
+  release:
+    types:
+      - published
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.9"
+
+      - name: Build artifacts
+        run: |
+          make terraform
+          mv ./build/terraform.zip terraform-granule-to-sns.zip
+
+      - uses: softprops/action-gh-release@v1
+        with:
+          files: terraform-granule-to-sns.zip
