@@ -9,7 +9,7 @@ from run_cumulus_task import run_cumulus_task
 def granule_to_sns(event: dict, _):
     client = boto3.client("sns")
 
-    response = client.publish(
+    client.publish(
         TopicArn=os.getenv("SNS_TOPIC_ARN"),
         Message="Hello World",
     )
