@@ -4,15 +4,19 @@ import boto3
 from mandible.log import init_root_logger, log_errors
 from run_cumulus_task import run_cumulus_task
 
+import json
 
-# TODO: (McKade) Finish this function
+
 def granule_to_sns(event: dict, _):
     client = boto3.client("sns")
+    granules = event["input"]["granules"]
 
-    client.publish(
-        TopicArn=os.getenv("SNS_TOPIC_ARN"),
-        Message="Hello World",
-    )
+    for granule in granules:
+        print(granule)
+        client.publish(
+            TopicArn=os.getenv("SNS_TOPIC_ARN"),
+            Message=json.dumps(granule),
+        )
 
 
 def lambda_handler(event, context):
