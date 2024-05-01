@@ -7,6 +7,23 @@ from run_cumulus_task import run_cumulus_task
 import json
 
 
+def generate_message(granule) -> dict:
+    return {
+        "identifier": granule["granuleId"],
+        "collection": granule["dataType"],
+        "product": {
+            "name": granule["granuleId"],
+            "files": [
+                {
+                    "name": file["fileName"],
+                    "uri": f"s3://{file['bucket']}/{file['key']}",
+                }
+                for file in granule["files"]
+            ]
+        }
+    }
+
+
 def granule_to_sns(event: dict, _):
     client = boto3.client("sns")
     granules = event["input"]["granules"]
@@ -15,7 +32,7 @@ def granule_to_sns(event: dict, _):
         print(granule)
         client.publish(
             TopicArn=os.getenv("SNS_TOPIC_ARN"),
-            Message=json.dumps(granule),
+            Message=json.dumps(generate_message(granule)),
         )
 
 
