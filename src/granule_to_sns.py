@@ -9,7 +9,7 @@ from run_cumulus_task import run_cumulus_task
 log = logging.getLogger(__name__)
 
 
-def generate_message(granule) -> dict:
+def generate_message(granule: dict) -> dict:
     return {
         "identifier": granule["granuleId"],
         "collection": granule["dataType"],
