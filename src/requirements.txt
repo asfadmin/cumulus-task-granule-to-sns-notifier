@@ -3,4 +3,4 @@ cumulus-message-adapter-python==2.2.0
 jsonpath-ng==1.4.2
 jsonschema==2.6.0
 mandible @ git+https://github.com/asfadmin/mandible@v0.4.0
-ply
+ply==3.11
