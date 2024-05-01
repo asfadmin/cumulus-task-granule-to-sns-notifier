@@ -39,3 +39,8 @@ variable "log_level" {
   type        = string
   default     = "INFO"
 }
+
+variable "aws_account_arns" {
+  description = "All the AWS account IDs that are allowed to subscribe to the SNS topic"
+  type        = list(string)
+}
