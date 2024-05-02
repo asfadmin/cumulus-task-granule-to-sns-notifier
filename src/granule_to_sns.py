@@ -46,4 +46,4 @@ def granule_to_sns(event: dict, _) -> dict:
 def lambda_handler(event, context):
     init_root_logger()
     with log_errors():
-        run_cumulus_task(granule_to_sns, event, context)
+        return run_cumulus_task(granule_to_sns, event, context)
