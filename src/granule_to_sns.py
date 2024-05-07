@@ -38,6 +38,12 @@ def granule_to_sns(event: dict, _) -> dict:
         client.publish(
             TopicArn=sns_topic_arn,
             Message=message,
+            MessageAttributes={
+                "collection": {
+                    "DataType": "String",
+                    "StringValue": granule["dataType"],
+                },
+            },
         )
 
     return event
