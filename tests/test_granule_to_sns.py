@@ -105,4 +105,4 @@ def test_generate_message(event, message):
 
 def test_granule_to_sns(sns_client, event, mocker):
     mocker.patch.object(sns_client, "publish", return_value={})
-    assert granule_to_sns(event, None) == event
+    assert granule_to_sns(event, None) == event["input"]
