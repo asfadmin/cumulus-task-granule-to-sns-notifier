@@ -27,9 +27,11 @@ def generate_message(granule: dict) -> dict:
 
 
 def granule_to_sns(event: dict, _) -> dict:
-    client = boto3.client("sns")
-    granules = event["input"]["granules"]
+    payload = event["input"]
 
+    granules = payload["granules"]
+
+    client = boto3.client("sns")
     sns_topic_arn = os.getenv("SNS_TOPIC_ARN")
 
     for granule in granules:
@@ -46,10 +48,10 @@ def granule_to_sns(event: dict, _) -> dict:
             },
         )
 
-    return event
+    return payload
 
 
-def lambda_handler(event, context):
+def lambda_handler(event: dict, context) -> dict:
     init_root_logger()
     with log_errors():
         return run_cumulus_task(granule_to_sns, event, context)
