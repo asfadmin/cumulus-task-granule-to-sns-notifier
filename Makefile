@@ -4,7 +4,7 @@ LAMBDA_SOURCES := $(wildcard src/*.py) src/requirements.txt
 TERRAFORM_ZIP_NAME := terraform.zip
 LAMBDA_ZIP_NAME := lambda.zip
 
-PYTHON := python3.10
+PYTHON := python3.11
 
 # Output directory
 DIR := build
